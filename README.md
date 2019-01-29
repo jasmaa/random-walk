@@ -1,3 +1,3 @@
 # Random Walk
 
-Demonstrates optional stopping theorem by simulating random walks
+Simple demonstration of optional stopping theorem by simulating random walks

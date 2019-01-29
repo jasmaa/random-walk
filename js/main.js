@@ -5,7 +5,7 @@ var context;
 var sim;
 var width = 10;
 var numDots = 100;
-var startPos = 3;
+var startPos = 5;
 
 var done = [];
 var data = [];
@@ -17,7 +17,6 @@ var data = [];
 function init(){
 	canvas = document.getElementById('game');
 	context = canvas.getContext("2d");
-	context.font = "80px Georgia";
 
 	// init data
 	currPos = [];
@@ -27,6 +26,9 @@ function init(){
 		done.push(false);
 	}
 	
+	document.getElementById('expected').innerHTML = "Expected number on left side: " + (numDots - (startPos / width) * numDots);
+	
+	// set up chart
 	var scatterChartData = {
 		datasets: [{
 			label: 'My First dataset',
@@ -39,8 +41,7 @@ function init(){
 		data: scatterChartData,
 		options: {
 			title: {
-				display: true,
-				text: 'Random Walk'
+				display: false,
 			},
 			
 			scales: {
@@ -71,10 +72,14 @@ function init(){
 
 function update(){
 	
+	var left = 0;
+	var right = 0;
+	
 	for(var i=0; i < data.length; i++){
 		
 		var pos = data[i];
 		
+		// update positions
 		if(pos.x > 0 && pos.x < width){
 			// move dot
 			if(Math.random() > 0.5){
@@ -87,7 +92,24 @@ function update(){
 		else{
 			done[i] = true;
 		}
+		
+		// tally sides
+		if(pos.x == 0){
+			left++;
+		}
+		else if(pos.x == width){
+			right++;
+		}
+		
+		if(left + right == numDots){
+			document.getElementById('done').innerHTML = "DONE!";
+			clearInterval(sim);
+		}
 	}
+	
+	
+	document.getElementById('leftVal').innerHTML = "Left side: " + left;
+	document.getElementById('rightVal').innerHTML = "Right side: " + right;
 	
 	// update chart
 	window.myScatter.update();
