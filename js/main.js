@@ -15,10 +15,18 @@ var data = [];
  * @return {[type]} [description]
  */
 function init(){
+	clearInterval(sim);
+	document.getElementById('done').innerHTML = "";
+	
 	canvas = document.getElementById('game');
 	context = canvas.getContext("2d");
 
 	// init data
+	width = parseInt(document.getElementById('width').value);
+	numDots = parseInt(document.getElementById('numDots').value);
+	startPos = parseInt(document.getElementById('startPos').value);
+	speed = parseInt(document.getElementById('speed').value);
+	
 	currPos = [];
 	data = [];
 	for(var i=0; i < numDots; i++){
@@ -26,7 +34,7 @@ function init(){
 		done.push(false);
 	}
 	
-	document.getElementById('expected').innerHTML = "Expected number on left side: " + (numDots - (startPos / width) * numDots);
+	document.getElementById('expected').innerHTML = (numDots - (startPos / width) * numDots);
 	
 	// set up chart
 	var scatterChartData = {
@@ -67,7 +75,7 @@ function init(){
 	});
 	
 	// loop simulation
-	sim = setInterval(update, 500);
+	sim = setInterval(update, 500 - 5*speed);
 }
 
 function update(){
@@ -108,12 +116,9 @@ function update(){
 	}
 	
 	
-	document.getElementById('leftVal').innerHTML = "Left side: " + left;
-	document.getElementById('rightVal').innerHTML = "Right side: " + right;
+	document.getElementById('leftVal').innerHTML = left;
+	document.getElementById('rightVal').innerHTML = right;
 	
 	// update chart
 	window.myScatter.update();
 }
-
-// Start simulation
-init();

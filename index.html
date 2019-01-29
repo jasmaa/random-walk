@@ -1,15 +1,81 @@
 <html>
 	<body>
-	
-		<div style="width:50%">
-			<canvas id="game" width="600" height="400" style="border:1px solid #000000;"></canvas>
+		<div class="container">
+		
+			<h1 align="center">Random Walk</h1>
+			<br>
+		
+			<div class="row">
+			 
+				<div class="col">
+					<div style="width:100%">
+						<canvas id="game" width="600" height="400" style="border:1px solid #000000;"></canvas>
+					</div>
+					
+				</div>
+				
+				<div class="col">
+
+					<div class="card">
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1"># of Walkers</span>
+						  </div>
+						  <input id="numDots" type="number" min="1" max="100" value="100">
+						</div>
+						
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Width</span>
+						  </div>
+						  <input id="width" type="number" min="1" max="500" value="10">
+						</div>
+						
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Start Position</span>
+						  </div>
+						  <input id="startPos" type="number" min="1" max="500" value="5">
+						</div>
+						
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Speed</span>
+						  </div>
+						  <input id="speed" type="range" min="0" max="100" value="0">
+						</div>
+						
+						<br><br>
+						
+						<button id="start-but" onclick="init()">START</button>
+					</div>
+					
+					<div class="card">
+						<table class="table">
+						  <thead>
+							<tr>
+							  <th># Expected on Left</th>
+							  <th># on Left</th>
+							  <th># on Right</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr>
+							  <td id="expected"></td>
+							  <td id="leftVal"></td>
+							  <td id="rightVal"></td>
+							</tr>
+						  </tbody>
+						</table>
+						<p id="done"></p>
+					</div>
+					
+				</div>
+				
+			</div>
 		</div>
 		
-		<p id="expected"></p>
-		<p id="leftVal"></p>
-		<p id="rightVal"></p>
-		<p id="done"></p>
-		
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="style/style.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
 		<script src="./js/main.js"></script>
